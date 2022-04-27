@@ -24,8 +24,18 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <% if logged_in? %>
+                <li class="nav-item"><%= link_to "Profile", user_path(current_user.id), class: "nav-link px-lg-3 py-3 py-lg-4" %></li>
+                <li class="nav-item"><%= link_to "Logout", session_path(current_user.id), method: :delete, class: "nav-link px-lg-3 py-3 py-lg-4" %></li>
                 <li class="nav-item"><%= link_to "liste des postes", posts_path, class: "nav-link px-lg-3 py-3 py-lg-4" %></li>
                 <li class="nav-item"><%= link_to "nouveau poste", new_post_path, class: "nav-link px-lg-3 py-3 py-lg-4" %></li>
+
+                <% else %>
+                <%= link_to "Sign up", new_user_path %>
+                <%= link_to "Login", new_session_path %>
+                <% end %>
+
+                
               </ul>
           </div>
       </div>
@@ -35,13 +45,6 @@
         <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
 
-    <% if logged_in? %>
-      <%= link_to "Profile", user_path(current_user.id) %>
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
-    <% end %>
     
     <%= yield %>
     <footer class="border-top">
