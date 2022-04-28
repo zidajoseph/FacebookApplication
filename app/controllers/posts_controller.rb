@@ -5,7 +5,10 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  # def show
+  # end
   def show
+    @favorite = current_user.favorites.find_by(post_id: @post.id)
   end
 
   def new
@@ -16,13 +19,15 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    # @post = Post.new(post_params)
+    # @post.user_id = current_user.id
+    @post = current_user.posts.build(post_params)
 
     if params[:back]
       render :new
     else
       if @post.save
-        redirect_to posts_path, notice: "I have created a blog!"
+        redirect_to posts_path, notice: "I have created a post!"
       else
         render :new
       end
@@ -51,7 +56,9 @@ class PostsController < ApplicationController
   end
 
   def confirm
-    @post = Post.new(post_params)
+    # @post = Post.new(post_params)
+    # @post.user_id = current_user.id
+    @post = current_user.posts.build(post_params)
     render :new if @post.invalid?
   end
 
