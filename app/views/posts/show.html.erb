@@ -27,6 +27,15 @@
                   </p>
 
                   <p>
+                    <strong>Image:</strong>
+                    <%= image_tag @post.image.url if @post.image && @post.image.url %>              
+                  </p>
+
+                  <p>
+                    publish by <%=@post.user.name%>
+                  </p>
+
+                  <p>
                         <% unless @post.user_id == current_user.id %>
                             <% if @favorite.present? %>
                                 <%= link_to 'Unfavorite', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
@@ -36,8 +45,12 @@
                         <% end %>
                     </p>
 
-                  <%= link_to 'Edit', edit_post_path(@post) %> |
-                  <%= link_to 'Back', posts_path %>
+                    <% if @post.user_id == current_user.id %>
+                        <%= link_to 'Edit', edit_post_path(@post) %> | <%= link_to 'Back', posts_path %>
+                    <% else %>
+                        <%= link_to 'Back', posts_path %>
+                    <% end %>    
+                  
               </div>
             </div>
         </div>

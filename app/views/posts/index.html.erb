@@ -21,6 +21,7 @@
                 <% @posts.each do |post| %>
                   <tr>
                     <td> <h2 class="post-title"> <%= post.content %> </h2> publish by <%=post.user.name%> </br> </br></td>
+                    <%= image_tag(post.image.url) if post.image && post.image.url %>
                     <td><%= link_to 'Show', post %></td>
                     <% if post.user_id == current_user.id %>
                       <td><%= link_to 'Modifier', edit_post_path(post) %></td>

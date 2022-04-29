@@ -31,6 +31,13 @@
                         <%= form.text_field :content, placeholder: "Entrez le contenu du poste...", class: "form-control", id: "inputTitle" %>
                         <label for="inputTitle">Content</label>
                     </div>
+
+                    <div class="field">
+                        <%= form.label :image %>
+                        <%= image_tag(post.image.url) if post.image && post.image.url %>
+                        <%= form.file_field :image %>
+                        <%= form.hidden_field :image_cache %>
+                    </div>
                     <br />
                     <%= form.submit nil, class: "btn btn-primary text-uppercase" %>
                 <% end %>

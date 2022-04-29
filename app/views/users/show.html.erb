@@ -19,6 +19,12 @@
                 <h1>page of <%= @user.name %></h1>
 
                 <p>E-mail address: <%= @user.email %></p>
+
+                <p>
+                    <strong>Image:</strong>
+                    <%= @user.image.url %> 
+                    <%= image_tag @user.image.url if @user.image && @user.image.url %>                   
+                  </p>
             </div>
         </div>
     </div>
